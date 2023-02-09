@@ -1,0 +1,43 @@
+{
+  "tasksRunnerOptions": {
+    "default": {
+      "runner": "nx/tasks-runners/default",
+      "options": {
+        "cacheableOperations": [
+          "build",
+          "test"
+        ]
+      }
+    }
+  },
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*"
+    ],
+    "production": [
+      "default",
+      "!{projectRoot}/**/*.md",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/jest.config.[jt]s",
+      "!{projectRoot}/.eslintrc.json"
+    ],
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": [
+        "production"
+      ],
+      "outputs": [
+        "{workspaceRoot}/dist"
+      ]
+    },
+    "test": {
+      "inputs": [
+        "default",
+        "!{projectRoot}/**/*.md",
+        "!{projectRoot}/.eslintrc.json"
+      ]
+    }
+  },
+  "defaultBase": "main"
+}
