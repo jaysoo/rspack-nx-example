@@ -1,4 +1,5 @@
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const { resolve } = require('path');
 
 const isProd = process.env.NODE_ENV === 'production';
 const isDev = process.env.NODE_ENV === 'development';
@@ -28,7 +29,14 @@ module.exports = {
     ],
   },
   resolve: {
-    plugins: [new TsconfigPathsPlugin({})]
+    // Manually map paths from tsconfig.
+    alias: {
+      ui: resolve(__dirname, 'ui/src/index.ts')
+    },
+    // This is not working it seems?
+    plugins: [new TsconfigPathsPlugin({
+      configFile: resolve(__dirname, 'tsconfig.base.json')
+    })]
   },
   infrastructureLogging: {
     debug: false,

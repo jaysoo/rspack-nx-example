@@ -1,9 +1,11 @@
+import { Header } from 'ui';
+
 import styles from './app.module.css';
 
 export function App() {
   return (
     <div className={styles['container']}>
-      <h1 data-testid="header" className={styles['header']}>Hello Rust!</h1>
+      <Header>Hello Rust!</Header>
       <p>NODE_ENV: {process.env['NODE_ENV']}</p>
     </div>
   );

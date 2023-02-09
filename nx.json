@@ -19,13 +19,15 @@
       "!{projectRoot}/**/*.md",
       "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
       "!{projectRoot}/jest.config.[jt]s",
-      "!{projectRoot}/.eslintrc.json"
-    ],
+      "!{projectRoot}/.eslintrc.json",
+      "!{projectRoot}/tsconfig.spec.json"
+    ]
   },
   "targetDefaults": {
     "build": {
       "inputs": [
-        "production"
+        "production",
+        "^production"
       ],
       "outputs": [
         "{workspaceRoot}/dist"
@@ -34,10 +36,28 @@
     "test": {
       "inputs": [
         "default",
+        "^production",
         "!{projectRoot}/**/*.md",
-        "!{projectRoot}/.eslintrc.json"
+        "!{projectRoot}/.eslintrc.json",
+        "{workspaceRoot}/jest.preset.js"
+      ]
+    },
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json"
       ]
     }
   },
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "generators": {
+    "@nrwl/react": {
+      "application": {
+        "babel": true
+      },
+      "library": {
+        "unitTestRunner": "jest"
+      }
+    }
+  }
 }

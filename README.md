@@ -49,3 +49,19 @@ npx nx test
 
 > NOTE: Nx caches the test result if the source and test files have no changed. When a non-source, non-test file (e.g. `*.md`) changes, the test is still cached.
 
+You can also test the `ui` library (which is not included in app tests).
+
+```bash
+npx nx test ui
+```
+
+> NOTE: Changes to `ui` spec files do not affect the app's test cache. So updating say `header.spec.tsx` will not invalidate cache for `npx nx test`.
+
+To run _all_ tests, use this command.
+
+```bash
+npx nx run-many -t test
+```
+
+
+
